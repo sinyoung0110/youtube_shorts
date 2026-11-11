@@ -1,10 +1,10 @@
 # Manim 이진 탐색 쇼츠
 
-`binary_search.py`는 Apple SD Gothic Neo 산세리프 글꼴을 사용한 9:16, 1080×1920, 30fps 영상 예제입니다. 정렬된 배열 `[4, 9, 13, 18, 23, 27, 31, 36, 42]`에서 27을 찾고, 가운데 비교가 `23 → 31 → 27` 순서로 진행됩니다. macOS 기본 한국어 음성 Yuna 내레이션도 포함합니다.
+`binary_search.py`는 정렬 배열 `[-1, 0, 3, 5, 9, 12]`에서 9를 찾아 `lo / mid / hi` 반복문, 경계 갱신, Big O를 설명합니다. Apple SD Gothic Neo 글꼴을 쓰며 Remotion 버전과 같은 오프라인 한국어 내레이션을 포함합니다.
 
 ## 설치
 
-이 Mac에서는 아래 설치와 렌더를 완료했습니다. 새 환경에서는 macOS용 Cairo/Pango 개발 파일과 Python 패키지가 필요합니다.
+이 Mac에서는 Manim 설치를 완료했습니다. 새 환경에서 Cairo/Pango 개발 파일과 Python 패키지를 준비합니다.
 
 ```bash
 cd /Users/sinyoung/youtube-shorts
@@ -15,7 +15,7 @@ python -m pip install -r manim/requirements.txt
 ln -sf "$(python -c 'import imageio_ffmpeg; print(imageio_ffmpeg.get_ffmpeg_exe())')" manim/.venv/bin/ffmpeg
 ```
 
-ImageIO 패키지의 ffmpeg 실행 파일을 가상환경에 연결하므로 이 예제에는 Homebrew의 ffmpeg formula가 필요하지 않습니다. `MathTex`를 새로 추가할 때만 LaTeX 배포판을 설치하세요. 현재 코드는 `Text`만 사용합니다.
+ImageIO에 포함된 ffmpeg를 사용하므로 이 영상에는 Homebrew ffmpeg formula가 필요하지 않습니다. 추가 LaTeX도 필요하지 않습니다.
 
 ## 렌더
 
@@ -25,16 +25,4 @@ source manim/.venv/bin/activate
 manim -pqh manim/binary_search.py BinarySearchShorts
 ```
 
-- `-p`: 렌더 뒤 동영상 열기
-- `-q h`: 고화질 프리셋. 빠른 미리보기는 `-q l`
-
-완성 영상은 `manim/media/videos/binary_search/1920p30/BinarySearchShorts.mp4`에 생성됩니다. 이 환경에서 생성·검증한 파일은 [BinarySearchShorts.mp4](media/videos/binary_search/1920p30/BinarySearchShorts.mp4)입니다. 길이는 33.50초, 1080×1920, 30fps, H.264이며 AAC 내레이션과 전체 디코딩 검사를 확인했습니다. 내레이션 원본과 타임라인은 `remotion/public/audio/narration.wav` 및 `shared/내레이션.md`에 있습니다.
-
-메타데이터와 재생 여부는 가상환경의 ffmpeg로 확인할 수 있습니다:
-
-```bash
-ffmpeg -i manim/media/videos/binary_search/1920p30/BinarySearchShorts.mp4
-ffmpeg -v error -i manim/media/videos/binary_search/1920p30/BinarySearchShorts.mp4 -f null -
-```
-
-한글이 네모로 표시되면 `binary_search.py`의 `Text`에 macOS 한글 산세리프 글꼴을 명시하세요.
+완료 파일은 `manim/media/videos/binary_search/1920p30/BinarySearchShorts.mp4`입니다. 이 렌더는 55.04초, 1080×1920, 30fps, H.264/AAC이며 전체 디코딩 검사를 통과했습니다. 내레이션 WAV와 정확한 대본은 `remotion/public/audio/narration.wav`, `shared/내레이션.md`에 있습니다.

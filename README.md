@@ -1,55 +1,70 @@
 # youtube_shorts
 
-## 첫 알고리즘 쇼츠: 이진 탐색
+## 첫 알고리즘 쇼츠: 배열 이진 탐색
 
-처음 제작할 수 있도록 대본, 장면표, Manim 예제와 세 가지 제작 환경을 한곳에 모았습니다. 최종 목표는 세로 9:16, 1080×1920, 약 31–33초입니다.
+정렬 배열에서 `9`를 찾으며 `lo`, `mid`, `hi`, 반복문 코드와 Big O를 함께 익히는 55초 영상입니다. 개념 설명 뒤에 문제 풀이에 다시 쓸 수 있도록 실행 흐름과 경계 갱신 코드를 보여줍니다.
 
-## 내용 검산
+## 예시와 코드
 
-정렬된 배열은 `[4, 9, 13, 18, 23, 27, 31, 36, 42]`, 목표는 `27`입니다. 0부터 세는 인덱스에서 가운데 값은 `23`(인덱스 4)이고, 목표가 더 크므로 왼쪽 절반과 가운데를 버립니다. 남은 `[27, 31, 36, 42]`의 가운데 값은 `31`(인덱스 6)입니다. 목표가 더 작으므로 `31`과 오른쪽을 버리고, 인덱스 5의 `27`을 찾습니다. 이 입력에서는 세 번 비교합니다.
+```text
+A = [-1, 0, 3, 5, 9, 12]   x = 9
 
-`O(log n)`은 탐색 범위를 절반 가까이 줄이는 방식에서 비교 횟수가 데이터 수보다 훨씬 천천히 증가한다는 뜻입니다. 배열이 정렬되어 있어야 사용할 수 있습니다.
+lo=0, hi=5 → mid=(0+5)//2=2 → A[2]=3 < 9 → lo=3
+lo=3, hi=5 → mid=(3+5)//2=4 → A[4]=9 → return 4
+```
 
-## 34초 내레이션 초안
+가운데 값 확인은 2회입니다. `mid`의 `// 2`는 정수 나눗셈(내림)입니다.
 
-정렬된 숫자 목록에서 27을 찾아볼게요. 숫자를 하나씩 확인하는 대신, 가운데부터 봅니다. 아홉 개의 가운데인 23은 27보다 작네요. 그러면 왼쪽은 볼 필요가 없어요. 남은 네 개의 가운데 31은 27보다 큽니다. 이번엔 오른쪽을 제외해요. 이제 남은 숫자는 27 하나. 세 번 만에 찾았습니다. 이진 탐색은 범위를 절반 가까이 줄여 가서, 데이터가 많아져도 확인 횟수가 천천히 늘어요. 그래서 시간 복잡도를 O(log n)이라고 씁니다. 단, 목록이 정렬되어 있어야 사용할 수 있어요.
+```python
+def binary_search(A, x):
+    lo, hi = 0, len(A) - 1
+    while lo <= hi:
+        mid = (lo + hi) // 2
+        if A[mid] == x:
+            return mid
+        if A[mid] < x:
+            lo = mid + 1
+        else:
+            hi = mid - 1
+    return -1
+```
+
+`lo`와 `hi`는 현재 확인할 인덱스 구간의 양 끝이며, 둘 다 포함합니다. 각 반복에서 가운데를 확인하고 불가능한 쪽 절반을 제외합니다. 값이 없으면 `lo > hi`가 되어 `-1`을 반환합니다. 배열은 반드시 정렬되어 있어야 합니다.
+
+## Big O
+
+- 최선: 목표가 첫 `mid`와 같으면 `O(1)`.
+- 평균·최악: 남은 구간이 절반씩 줄어 `O(log n)` 시간.
+- 길이 16의 최악 탐색은 `⌊log₂16⌋ + 1 = 5`번 이내로 `mid`를 확인합니다. 길이가 커져도 확인 횟수는 천천히 증가합니다.
+- 이 반복문 버전의 추가 공간은 `O(1)`입니다.
+- Big O는 이 예제에서 항상 정확히 몇 번 실행된다는 말이 아니라, 입력이 커질 때 비용이 증가하는 비율을 나타냅니다.
+
+보내주신 `bst_search`는 배열 이진 탐색과 구분되는 BST 재귀 검색입니다. 배열 코드는 `lo/mid/hi` 인덱스를 움직이고, BST 코드는 `node.left/right`로 내려갑니다. 양쪽 모두 비교 결과에 따라 후보를 줄인다는 아이디어를 공유합니다.
 
 ## 장면표
 
-| 시간 | 화면과 설명 |
+| 시간 | 화면 |
 | --- | --- |
-| 0–3초 | 첫 화면부터 질문: “숫자 27, 몇 번 만에 찾을까?” |
-| 3–7초 | 정렬된 배열 9개와 목표값 27을 소개 |
-| 7–14초 | 인덱스 4의 23을 확인. 27 > 23이므로 왼쪽 범위를 흐리게 제외 |
-| 14–21초 | 남은 범위의 가운데 인덱스 6, 값 31을 확인. 27 < 31이므로 오른쪽 제외 |
-| 21–26초 | 인덱스 5의 27을 강조하고 “세 번 만에 찾음” 표시 |
-| 26–33초 | 범위를 절반 가까이 줄이는 원리와 O(log n), 정렬 조건 요약 |
+| 0–4초 | 정렬 배열과 target 9 소개 |
+| 4–13초 | `lo=0, hi=5, mid=2`, `A[2]=3`; `lo=3`으로 갱신 |
+| 13–21초 | 남은 `3..5`에서 `mid=4`, `A[4]=9`, `return 4` |
+| 21–37초 | 반복문 코드와 조건별 경계 갱신을 순서대로 강조 |
+| 37–48초 | `16→8→4→2→1`, 최선 `O(1)`, 최악 `O(log n)` |
+| 48–55초 | 정렬·가운데·절반 제거 요약, 배열과 BST의 구조 차이 |
 
-## 폴더와 실행
+대본과 수치 검산은 [`shared/대본.md`](shared/대본.md), [`shared/장면표.md`](shared/장면표.md)에 있습니다.
 
-- `manim/binary_search.py` — Python Manim 세로 영상 예제
-- `remotion/` — Remotion React 프로젝트와 Codex용 `remotion-create` 스킬
-- `hyperframes/` — HyperFrames HTML/GSAP 프로젝트와 Codex용 스킬
-- `openmontage/` — 공식 OpenMontage Git submodule. 새 복제본은 `git clone --recurse-submodules`로 받습니다.
-- `shared/openmontage-brief.md` — OpenMontage용 제작 brief
-- `shared/` — 모든 제작본에서 공유하는 대본과 타임라인 및 음성 대본
-- `remotion/public/audio/narration.wav` — macOS 기본 한국어 음성 Yuna로 만든 오프라인 내레이션
+## 결과물
 
-Manim은 이 컴퓨터에서 설치와 렌더를 완료했습니다. 새 Mac에서는 Cairo/Pango/pkg-config를 준비한 뒤 가상환경에 의존성을 설치하고, ImageIO에 포함된 ffmpeg를 가상환경 명령으로 연결합니다:
+- Remotion MP4: [`remotion/out/binary-search.mp4`](remotion/out/binary-search.mp4)
+- Manim MP4: [`manim/media/videos/binary_search/1920p30/BinarySearchShorts.mp4`](manim/media/videos/binary_search/1920p30/BinarySearchShorts.mp4)
+- 오프라인 음성 원본: [`remotion/public/audio/narration.wav`](remotion/public/audio/narration.wav), macOS Yuna 음성
+- Remotion은 55.02초, Manim은 55.04초입니다. 두 버전 모두 세로 1080×1920, 30fps, H.264이며 오프라인 내레이션 AAC 트랙을 포함합니다. 두 MP4 전체 디코딩을 확인했습니다.
+- HyperFrames는 이전 독립 초안으로 남아 있으며, 이번 코드 중심 대본으로 다시 렌더하지 않았습니다.
 
-```bash
-cd /Users/sinyoung/youtube-shorts
-brew install cairo pango pkgconf
-python3 -m venv manim/.venv
-source manim/.venv/bin/activate
-python -m pip install -r manim/requirements.txt
-ln -sf "$(python -c 'import imageio_ffmpeg; print(imageio_ffmpeg.get_ffmpeg_exe())')" manim/.venv/bin/ffmpeg
-manim -pqh manim/binary_search.py BinarySearchShorts
-```
+## 실행
 
-이 영상은 `manim/media/videos/binary_search/1920p30/BinarySearchShorts.mp4`에 있습니다. Homebrew의 ffmpeg formula 설치는 필요하지 않습니다. LaTeX 오류는 이 예제에서 LaTeX를 사용하지 않으므로 무시해도 됩니다.
-
-Remotion 미리보기와 렌더:
+Remotion:
 
 ```bash
 cd /Users/sinyoung/youtube-shorts/remotion
@@ -57,34 +72,22 @@ npm run dev
 npx remotion render BinarySearchShorts out/binary-search.mp4
 ```
 
-HyperFrames 검사, 미리보기, 렌더:
+Manim:
 
 ```bash
-cd /Users/sinyoung/youtube-shorts/hyperframes
-npx --yes hyperframes@0.9.33 check --json
-npm run dev
-npx --yes hyperframes@0.9.33 render --quality looks -o out/binary-search.mp4
+cd /Users/sinyoung/youtube-shorts
+source manim/.venv/bin/activate
+manim -pqh manim/binary_search.py BinarySearchShorts
 ```
 
-OpenMontage 가상환경:
+`manim/README.md`에는 새 Mac의 설치 방법도 있습니다. 이 컴퓨터에서는 Python 3.12.4, Manim 0.22.1, Node 26.13.0을 사용합니다. Remotion은 macOS에서 렌더 경고를 출력할 수 있지만 인코딩은 완료합니다.
 
-```bash
-cd /Users/sinyoung/youtube-shorts/openmontage
-source .venv/bin/activate
-export PATH="/Users/sinyoung/.nvm/versions/node/v26.13.0/bin:$PATH"
-make preflight
-```
+## 저장소 구성
 
-## 생성 확인
+- `remotion/`: 코드 강조와 내레이션이 포함된 메인 영상
+- `manim/`: 같은 설명을 Python Manim으로 표현한 보조 버전
+- `hyperframes/`: 별도로 검증해 둔 무음 초안. 현재 55초 코드 중심 버전은 아님
+- `openmontage/`: 공식 OpenMontage 서브모듈
+- `shared/`: 대본, 장면표, OpenMontage brief
 
-Remotion 버전은 33.00초, Manim 버전은 33.50초입니다. 두 영상 모두 1080×1920, 30fps, H.264이며 같은 오프라인 한국어 내레이션을 포함합니다. 전체 디코딩 검사도 통과했습니다. Remotion은 `remotion/out/binary-search.mp4`, Manim은 `manim/media/videos/binary_search/1920p30/BinarySearchShorts.mp4`입니다. HyperFrames `check --json --snapshots`는 오류 없이 통과했지만 HyperFrames 자체 MP4는 아직 렌더하지 않았습니다.
-
-음성은 macOS 기본 `Yuna` 한국어 음성으로 생성했습니다. 이 예제에는 별도의 배경 음악은 없습니다. 타임라인이 있는 대본은 `shared/내레이션.md`에서 확인할 수 있습니다.
-
-## 환경 상태와 수동 설정
-
-Node.js 26.13.0, Python 3.12.4, Manim 0.22.1을 확인했습니다. 오래된 Command Line Tools는 16.2로 업데이트했고, `pkgconf`와 Manim 의존성을 설치했습니다. Homebrew 자체도 `brew update`에서 최신이라고 확인됐습니다. 이 macOS 14.5 환경에서 Homebrew ffmpeg formula 설치는 `ninja` 소스 빌드 오류로 중단됐지만, Manim은 ImageIO에 포함된 ffmpeg로 렌더가 정상 완료되어 추가 수동 설정은 없습니다. OpenMontage는 Python 패키지·Remotion 컴포저·오프라인 Piper를 설치했습니다. Remotion Studio도 열렸습니다.
-
-OpenMontage의 무료 Piper 한국어 음성을 쓰려면 사용할 한국어 음성 모델을 한 번 내려받아야 할 수 있습니다. 스톡 검색이나 클라우드 음성·이미지 제공자는 무료 API 키를 `.env`에 직접 추가해야 합니다. 키는 이 저장소에 커밋하지 마세요. 이번 예제의 대본과 세 로컬 프로젝트는 API 키 없이 준비했습니다.
-
-Remotion 사용 시 회사 규모에 따라 별도 라이선스가 필요할 수 있으므로 영상 게시 전 [Remotion 라이선스](https://www.remotion.dev/license)를 확인하세요. OpenMontage 저장소는 AGPL-3.0입니다.
+API 키, 가상환경, Node 의존성은 저장소에 포함하지 않습니다. OpenMontage 클라우드 공급자를 쓸 때만 필요한 키를 로컬 `.env`에 넣으세요.
