@@ -1,6 +1,6 @@
 # Manim 이진 탐색 쇼츠
 
-`binary_search.py`는 9:16, 1080×1920, 30fps 영상 예제입니다. 정렬된 배열 `[4, 9, 13, 18, 23, 27, 31, 36, 42]`에서 27을 찾고, 가운데 비교가 `23 → 31 → 27` 순서로 진행됩니다.
+`binary_search.py`는 Apple SD Gothic Neo 산세리프 글꼴을 사용한 9:16, 1080×1920, 30fps 영상 예제입니다. 정렬된 배열 `[4, 9, 13, 18, 23, 27, 31, 36, 42]`에서 27을 찾고, 가운데 비교가 `23 → 31 → 27` 순서로 진행됩니다. macOS 기본 한국어 음성 Yuna 내레이션도 포함합니다.
 
 ## 설치
 
@@ -28,7 +28,7 @@ manim -pqh manim/binary_search.py BinarySearchShorts
 - `-p`: 렌더 뒤 동영상 열기
 - `-q h`: 고화질 프리셋. 빠른 미리보기는 `-q l`
 
-완성 영상은 `manim/media/videos/binary_search/1920p30/BinarySearchShorts.mp4`에 생성됩니다. 이 환경에서 생성·검증한 파일은 [BinarySearchShorts.mp4](media/videos/binary_search/1920p30/BinarySearchShorts.mp4)입니다. 길이는 31.60초, 1080×1920, 30fps, H.264이며 전체 디코딩 검사에 통과했습니다.
+완성 영상은 `manim/media/videos/binary_search/1920p30/BinarySearchShorts.mp4`에 생성됩니다. 이 환경에서 생성·검증한 파일은 [BinarySearchShorts.mp4](media/videos/binary_search/1920p30/BinarySearchShorts.mp4)입니다. 길이는 33.50초, 1080×1920, 30fps, H.264이며 AAC 내레이션과 전체 디코딩 검사를 확인했습니다. 내레이션 원본과 타임라인은 `remotion/public/audio/narration.wav` 및 `shared/내레이션.md`에 있습니다.
 
 메타데이터와 재생 여부는 가상환경의 ffmpeg로 확인할 수 있습니다:
 

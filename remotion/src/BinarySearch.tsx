@@ -1,4 +1,4 @@
-import { AbsoluteFill, interpolate, useCurrentFrame } from "remotion";
+import { AbsoluteFill, Audio, interpolate, staticFile, useCurrentFrame } from "remotion";
 
 const values = [4, 9, 13, 18, 23, 27, 31, 36, 42];
 
@@ -35,11 +35,12 @@ export const BinarySearch: React.FC = () => {
       style={{
         background: "radial-gradient(circle at 50% 30%, #20314d 0%, #101827 52%, #0a101a 100%)",
         color: "#f8fafc",
-        fontFamily: "Arial, Helvetica, sans-serif",
+        fontFamily: "Arial, \"Apple SD Gothic Neo\", Helvetica, sans-serif",
         padding: "132px 86px",
         justifyContent: "space-between",
       }}
     >
+      <Audio src={staticFile("audio/narration.wav")} volume={0.95} />
       <div style={{ color: "#65d6c4", fontSize: 32, fontWeight: 700, letterSpacing: 4 }}>
         알고리즘 01 · 이진 탐색
       </div>

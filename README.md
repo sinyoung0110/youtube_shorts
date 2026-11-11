@@ -32,7 +32,8 @@
 - `hyperframes/` — HyperFrames HTML/GSAP 프로젝트와 Codex용 스킬
 - `openmontage/` — 공식 OpenMontage Git submodule. 새 복제본은 `git clone --recurse-submodules`로 받습니다.
 - `shared/openmontage-brief.md` — OpenMontage용 제작 brief
-- `shared/` — 모든 제작본에서 공유하는 대본과 타임라인
+- `shared/` — 모든 제작본에서 공유하는 대본과 타임라인 및 음성 대본
+- `remotion/public/audio/narration.wav` — macOS 기본 한국어 음성 Yuna로 만든 오프라인 내레이션
 
 Manim은 이 컴퓨터에서 설치와 렌더를 완료했습니다. 새 Mac에서는 Cairo/Pango/pkg-config를 준비한 뒤 가상환경에 의존성을 설치하고, ImageIO에 포함된 ffmpeg를 가상환경 명령으로 연결합니다:
 
@@ -76,7 +77,9 @@ make preflight
 
 ## 생성 확인
 
-Remotion 버전은 33.00초, Manim 버전은 31.60초입니다. 두 영상 모두 1080×1920, 30fps, H.264로 생성됐고 전체 디코딩 검사도 통과했습니다. Manim의 영상은 `manim/media/videos/binary_search/1920p30/BinarySearchShorts.mp4`입니다. HyperFrames `check --json --snapshots`는 오류 없이 통과했지만 무음 초안 경고 1건이 남아 있고, HyperFrames MP4와 음성은 아직 없습니다.
+Remotion 버전은 33.00초, Manim 버전은 33.50초입니다. 두 영상 모두 1080×1920, 30fps, H.264이며 같은 오프라인 한국어 내레이션을 포함합니다. 전체 디코딩 검사도 통과했습니다. Remotion은 `remotion/out/binary-search.mp4`, Manim은 `manim/media/videos/binary_search/1920p30/BinarySearchShorts.mp4`입니다. HyperFrames `check --json --snapshots`는 오류 없이 통과했지만 HyperFrames 자체 MP4는 아직 렌더하지 않았습니다.
+
+음성은 macOS 기본 `Yuna` 한국어 음성으로 생성했습니다. 이 예제에는 별도의 배경 음악은 없습니다. 타임라인이 있는 대본은 `shared/내레이션.md`에서 확인할 수 있습니다.
 
 ## 환경 상태와 수동 설정
 
