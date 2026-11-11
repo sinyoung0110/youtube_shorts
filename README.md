@@ -58,3 +58,11 @@ Manim과 HyperFrames의 기존 산출물은 이번 Remotion 리마스터와 별�
 python3 -m venv ~/.venvs/supertonic
 ~/.venvs/supertonic/bin/pip install "supertonic==1.3.1"
 ```
+
+## 문제 풀이 영상: 2025 국가직 데이터직 알고리즘 14번
+
+재귀 이진 탐색 두 번의 모든 호출을 단계별로 보여주는 1분 44초 영상입니다. `key=22`의 실패 호출까지 `count=5`에 포함되고, 초기화 없이 이어지는 `key=52` 검색 후 `count=9`가 됩니다.
+
+- **영상:** [`remotion/out/binary-search-exam-2025-q14.mp4`](remotion/out/binary-search-exam-2025-q14.mp4)
+- **풀이·계산 표:** [`lessons/binary-search-exam-2025-q14/script.md`](lessons/binary-search-exam-2025-q14/script.md)
+- **코드와 장면표:** [`lessons/binary-search-exam-2025-q14/`](lessons/binary-search-exam-2025-q14/)
