@@ -66,3 +66,11 @@ python3 -m venv ~/.venvs/supertonic
 - **영상:** [`remotion/out/binary-search-exam-2025-q14.mp4`](remotion/out/binary-search-exam-2025-q14.mp4)
 - **풀이·계산 표:** [`lessons/binary-search-exam-2025-q14/script.md`](lessons/binary-search-exam-2025-q14/script.md)
 - **코드와 장면표:** [`lessons/binary-search-exam-2025-q14/`](lessons/binary-search-exam-2025-q14/)
+
+## 이진 탐색 중간값 공식 비교: 12 찾기
+
+배열 `[1,3,5,12,19,20,22,25,29,31]`에서 두 mid 공식으로 `12`를 찾는 과정을 비교합니다. 아래쪽 mid는 `19 → 3 → 5 → 12`, 위쪽 mid는 `20 → 5 → 19 → 12`를 확인하고 둘 다 인덱스 `3`을 반환합니다.
+
+- **영상:** [`remotion/out/binary-search-midpoint-12.mp4`](remotion/out/binary-search-midpoint-12.mp4)
+- **대본·풀이:** [`lessons/binary-search-midpoint-12/script.md`](lessons/binary-search-midpoint-12/script.md)
+- **코드·장면표:** [`lessons/binary-search-midpoint-12/`](lessons/binary-search-midpoint-12/)
