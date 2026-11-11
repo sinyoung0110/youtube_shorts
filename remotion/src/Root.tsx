@@ -5,7 +5,7 @@ export const RemotionRoot: React.FC = () => (
   <Composition
     id="BinarySearchShorts"
     component={BinarySearch}
-    durationInFrames={1650}
+    durationInFrames={3270}
     fps={30}
     width={1080}
     height={1920}
