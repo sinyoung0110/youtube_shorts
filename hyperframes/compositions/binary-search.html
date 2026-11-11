@@ -1,0 +1,63 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; color: #f8fafc; font-family: Inter, "Noto Sans JP", sans-serif; }
+    .clip { position: absolute; }
+    #kicker { left: 90px; top: 205px; width: 900px; color: #65d6c4; font-size: 34px; font-weight: 700; letter-spacing: 0.12em; text-align: center; }
+    #hook { left: 95px; top: 360px; width: 890px; font-size: 88px; font-weight: 800; line-height: 1.12; text-align: center; }
+    #array-label { left: 90px; top: 495px; width: 900px; color: #a8b8cd; font-size: 36px; text-align: center; }
+    #array { left: 105px; top: 605px; width: 870px; display: flex; justify-content: center; gap: 8px; }
+    .number { width: 88px; height: 150px; border: 3px solid #6b91d8; border-radius: 18px; background: #6b91d822; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 17px; }
+    .value { font-size: 42px; font-weight: 800; }
+    .index { color: #f8fafc; font-size: 28px; }
+    .instruction { left: 86px; top: 895px; width: 908px; height: 160px; text-align: center; }
+    .instruction-body, #complexity-body { position: absolute; inset: 0; }
+    .line { position: absolute; top: 0; left: 0; width: 100%; font-size: 47px; line-height: 1.22; font-weight: 750; }
+    .detail { position: absolute; top: 78px; left: 0; width: 100%; color: #d3dce8; font-size: 36px; }
+    .gold { color: #f4c95d; }
+    .green { color: #36d399; }
+    #complexity { left: 80px; top: 1060px; width: 920px; text-align: center; }
+    #complexity-title { position: absolute; top: 0; left: 0; width: 100%; font-size: 66px; color: #f4c95d; font-weight: 800; }
+    #complexity-copy { position: absolute; top: 95px; left: 0; width: 100%; font-size: 36px; line-height: 1.35; color: #d3dce8; }
+    #range-counts { position: absolute; top: 198px; left: 0; width: 100%; display: flex; justify-content: center; gap: 18px; font-size: 31px; font-weight: 750; color: #d3dce8; }
+  </style>
+  <div id="root" data-composition-id="scene" data-width="1080" data-height="1920">
+    <div id="kicker" class="clip" data-start="0" data-duration="33" data-track-index="0">알고리즘 01 · 이진 탐색</div>
+    <div id="hook" class="clip" data-start="0" data-duration="3" data-track-index="1">숫자 <span style="color:#f4c95d">27</span>,<br />몇 번 만에 찾을까?</div>
+    <div id="array-label" class="clip" data-start="3" data-duration="30" data-track-index="1">정렬된 배열 · 목표값 27</div>
+    <div id="array" class="clip" data-start="3" data-duration="30" data-track-index="2">
+      <div id="num-4" class="number"><span class="value">4</span><span class="index">idx 0</span></div>
+      <div id="num-9" class="number"><span class="value">9</span><span class="index">idx 1</span></div>
+      <div id="num-13" class="number"><span class="value">13</span><span class="index">idx 2</span></div>
+      <div id="num-18" class="number"><span class="value">18</span><span class="index">idx 3</span></div>
+      <div id="num-23" class="number"><span class="value">23</span><span class="index">idx 4</span></div>
+      <div id="num-27" class="number"><span class="value">27</span><span class="index">idx 5</span></div>
+      <div id="num-31" class="number"><span class="value">31</span><span class="index">idx 6</span></div>
+      <div id="num-36" class="number"><span class="value">36</span><span class="index">idx 7</span></div>
+      <div id="num-42" class="number"><span class="value">42</span><span class="index">idx 8</span></div>
+    </div>
+    <div id="step-1" class="clip instruction" data-start="7" data-duration="7" data-track-index="3" data-hold="true"><div id="step-1-body" class="instruction-body"><div class="line gold">가운데 값은 23</div><div class="detail">27 &gt; 23 · 왼쪽 절반 제외</div></div></div>
+    <div id="step-2" class="clip instruction" data-start="14" data-duration="7" data-track-index="3" data-hold="true"><div id="step-2-body" class="instruction-body"><div class="line gold">남은 가운데 값은 31</div><div class="detail">27 &lt; 31 · 오른쪽 절반 제외</div></div></div>
+    <div id="step-3" class="clip instruction" data-start="21" data-duration="5" data-track-index="3" data-hold="true"><div id="step-3-body" class="instruction-body"><div class="line green">찾았다! 정답은 27</div><div class="detail">세 번 비교했습니다</div></div></div>
+    <div id="complexity" class="clip" data-start="26" data-duration="7" data-track-index="4" data-hold="true"><div id="complexity-body"><div id="complexity-title">O(log n)</div><div id="complexity-copy">범위를 절반 가까이 줄여요.<br />정렬된 목록에서 사용할 수 있어요.</div><div id="range-counts"><span id="count-9">9개</span><span>→</span><span id="count-4">4개</span><span>→</span><span id="count-1">1개</span></div></div></div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    tl.fromTo(".number", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.48, stagger: 0.055, ease: "power4.out" }, 3.05);
+    tl.to("#num-23", { y: -16, borderColor: "#f4c95d", backgroundColor: "#f4c95d44", duration: 0.42, ease: "power3.out" }, 7.2);
+    tl.to("#num-4, #num-9, #num-13, #num-18, #num-23", { opacity: 0.22, scale: 0.94, duration: 0.5, stagger: 0.045, ease: "power2.inOut" }, 12.7);
+    tl.fromTo("#step-1-body", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.38, ease: "power4.out" }, 7.08);
+    tl.fromTo("#step-2-body", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.38, ease: "power4.out" }, 14.08);
+    tl.to("#num-31", { y: -16, borderColor: "#f4c95d", backgroundColor: "#f4c95d44", duration: 0.42, ease: "power3.out" }, 14.25);
+    tl.to("#num-31, #num-36, #num-42", { opacity: 0.22, scale: 0.94, duration: 0.5, stagger: 0.045, ease: "power2.inOut" }, 19.7);
+    tl.fromTo("#step-3-body", { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 0.38, ease: "power4.out" }, 21.08);
+    tl.to("#num-27", { y: -16, borderColor: "#36d399", backgroundColor: "#36d39955", duration: 0.5, ease: "power3.out" }, 21.2);
+    tl.fromTo("#complexity-body", { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.55, ease: "power4.out" }, 26.1);
+    tl.to("#count-9", { color: "#65d6c4", duration: 0.2 }, 26.8);
+    tl.to("#count-9", { color: "#a8b8cd", duration: 0.2 }, 28.05);
+    tl.to("#count-4", { color: "#65d6c4", duration: 0.2 }, 28.05);
+    tl.to("#count-4", { color: "#a8b8cd", duration: 0.2 }, 29.3);
+    tl.to("#count-1", { color: "#36d399", duration: 0.2 }, 29.3);
+    window.__timelines = window.__timelines || {};
+    window.__timelines["scene"] = tl;
+  </script>
+</template>
