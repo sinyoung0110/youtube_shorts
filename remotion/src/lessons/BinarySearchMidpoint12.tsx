@@ -72,31 +72,31 @@ export const BinarySearchMidpoint12: React.FC = () => {
   return (
     <AbsoluteFill style={{ background: "radial-gradient(circle at 50% 16%, #17202d 0%, #0b0d12 54%, #090b10 100%)", color: "#f4f5f7", fontFamily: '"Apple SD Gothic Neo", Arial, Helvetica, sans-serif' }}>
       <Audio src={staticFile("audio/binary-search-midpoint-12.wav")} volume={0.98} />
-      <div style={{ position: "absolute", top: 62, left: 70, color: colors.cyan, fontSize: 23, fontWeight: 750, letterSpacing: 2 }}>BINARY SEARCH <span style={{ color: "#738093" }}>/</span> MIDPOINT ROUNDING</div>
-      <div style={{ position: "absolute", top: 132, left: 58, right: 58, textAlign: "center", fontSize: 49, lineHeight: 1.2, fontWeight: 850 }}>{headers[phase]}</div>
+      <div style={{ position: "absolute", top: 210, left: 70, color: colors.cyan, fontSize: 23, fontWeight: 750, letterSpacing: 2 }}>BINARY SEARCH <span style={{ color: "#738093" }}>/</span> MIDPOINT ROUNDING</div>
+      <div style={{ position: "absolute", top: 300, left: 58, right: 58, textAlign: "center", fontSize: 49, lineHeight: 1.2, fontWeight: 850 }}>{headers[phase]}</div>
 
       {phase === 0 && <>
-        <Panel style={{ position: "absolute", top: 300, left: 120, right: 120, padding: 24, display: "flex", justifyContent: "center", alignItems: "center", gap: 25, borderColor: "#31534a" }}><span style={{ color: colors.muted, fontSize: 30 }}>찾을 값</span><b style={{ color: colors.green, fontSize: 52, fontFamily: "monospace" }}>12</b></Panel>
-        <div style={{ position: "absolute", top: 395, left: 60, right: 60, textAlign: "center", color: colors.muted, fontSize: 31 }}>오름차순 배열 · 인덱스 0부터 9</div>
-        <ArrayGrid top={445} />
-        <Panel style={{ position: "absolute", top: 850, left: 95, right: 95, padding: 32, textAlign: "center", borderColor: "#3c5960" }}><div style={{ color: colors.cyan, fontSize: 38, fontWeight: 850 }}>두 mid 공식으로 탐색 순서를 비교</div><div style={{ color: "#d1d7df", fontSize: 32, marginTop: 15 }}>각 단계에서 left · right · mid 갱신</div></Panel>
+        <Panel style={{ position: "absolute", top: 400, left: 120, right: 120, padding: 24, display: "flex", justifyContent: "center", alignItems: "center", gap: 25, borderColor: "#31534a" }}><span style={{ color: colors.muted, fontSize: 30 }}>찾을 값</span><b style={{ color: colors.green, fontSize: 52, fontFamily: "monospace" }}>12</b></Panel>
+        <div style={{ position: "absolute", top: 495, left: 60, right: 60, textAlign: "center", color: colors.muted, fontSize: 31 }}>오름차순 배열 · 인덱스 0부터 9</div>
+        <ArrayGrid top={545} />
+        <Panel style={{ position: "absolute", top: 950, left: 95, right: 95, padding: 32, textAlign: "center", borderColor: "#3c5960" }}><div style={{ color: colors.cyan, fontSize: 38, fontWeight: 850 }}>두 mid 공식으로 탐색 순서를 비교</div><div style={{ color: "#d1d7df", fontSize: 32, marginTop: 15 }}>각 단계에서 left · right · mid 갱신</div></Panel>
       </>}
 
       {phase === 1 && <>
-        <div style={{ position: "absolute", top: 310, left: 80, right: 80, textAlign: "center", color: colors.muted, fontSize: 31 }}>현재 구간이 index 0..9일 때</div>
-        <Panel style={{ position: "absolute", top: 410, left: 80, right: 80, padding: 32, borderColor: "#5a4b2c" }}><div style={{ color: colors.cyan, fontSize: 31, fontWeight: 800 }}>아래쪽 가운데 · floor</div><div style={{ color: "#f4f5f7", fontFamily: "monospace", fontSize: 37, marginTop: 18 }}>0 + (9 − 0) / 2 = <b style={{ color: colors.cyan }}>4</b></div></Panel>
-        <Panel style={{ position: "absolute", top: 680, left: 80, right: 80, padding: 32, borderColor: "#624d28" }}><div style={{ color: colors.yellow, fontSize: 31, fontWeight: 800 }}>위쪽 가운데 · upper mid</div><div style={{ color: "#f4f5f7", fontFamily: "monospace", fontSize: 37, marginTop: 18 }}>0 + (9 − 0 + 1) / 2 = <b style={{ color: colors.yellow }}>5</b></div></Panel>
-        <div style={{ position: "absolute", top: 980, left: 90, right: 90, textAlign: "center", color: colors.muted, fontSize: 30 }}>C의 정수 나눗셈 · 소수 부분 버림</div>
+        <div style={{ position: "absolute", top: 410, left: 80, right: 80, textAlign: "center", color: colors.muted, fontSize: 31 }}>현재 구간이 index 0..9일 때</div>
+        <Panel style={{ position: "absolute", top: 510, left: 80, right: 80, padding: 32, borderColor: "#5a4b2c" }}><div style={{ color: colors.cyan, fontSize: 31, fontWeight: 800 }}>아래쪽 가운데 · floor</div><div style={{ color: "#f4f5f7", fontFamily: "monospace", fontSize: 37, marginTop: 18 }}>0 + (9 − 0) / 2 = <b style={{ color: colors.cyan }}>4</b></div></Panel>
+        <Panel style={{ position: "absolute", top: 780, left: 80, right: 80, padding: 32, borderColor: "#624d28" }}><div style={{ color: colors.yellow, fontSize: 31, fontWeight: 800 }}>위쪽 가운데 · upper mid</div><div style={{ color: "#f4f5f7", fontFamily: "monospace", fontSize: 37, marginTop: 18 }}>0 + (9 − 0 + 1) / 2 = <b style={{ color: colors.yellow }}>5</b></div></Panel>
+        <div style={{ position: "absolute", top: 1080, left: 90, right: 90, textAlign: "center", color: colors.muted, fontSize: 30 }}>C의 정수 나눗셈 · 소수 부분 버림</div>
       </>}
 
       {(phase === 2 || phase === 3) && step && <>
-        <div style={{ position: "absolute", top: 260, left: 75, right: 75, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+        <div style={{ position: "absolute", top: 360, left: 75, right: 75, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <div style={{ color: phase === 2 ? colors.cyan : colors.yellow, fontSize: 31, fontWeight: 850 }}>key = 12</div>
           <Panel style={{ padding: "12px 22px", borderColor: phase === 2 ? colors.cyan : colors.yellow }}><span style={{ color: colors.muted, fontSize: 24 }}>비교</span><span style={{ color: "#f4f5f7", fontFamily: "monospace", fontSize: 33, fontWeight: 850, marginLeft: 15 }}>{(phase === 2 ? lowerIndex : upperIndex) + 1} / 4</span></Panel>
         </div>
-        <div style={{ position: "absolute", top: 330, left: 60, right: 60, textAlign: "center", color: colors.muted, fontFamily: "monospace", fontSize: 30 }}>{phase === 2 ? "mid = left + (right − left) / 2" : "mid = left + (right − left + 1) / 2"}</div>
+        <div style={{ position: "absolute", top: 430, left: 60, right: 60, textAlign: "center", color: colors.muted, fontFamily: "monospace", fontSize: 30 }}>{phase === 2 ? "mid = left + (right − left) / 2" : "mid = left + (right − left + 1) / 2"}</div>
         <ArrayGrid step={step} top={390} />
-        <Panel style={{ position: "absolute", top: 800, left: 75, right: 75, minHeight: 235, padding: 28, display: "flex", flexDirection: "column", justifyContent: "center", gap: 18, textAlign: "center" }}>
+        <Panel style={{ position: "absolute", top: 900, left: 75, right: 75, minHeight: 235, padding: 28, display: "flex", flexDirection: "column", justifyContent: "center", gap: 18, textAlign: "center" }}>
           <div style={{ color: colors.muted, fontFamily: "monospace", fontSize: 33 }}>left={step.left} · right={step.right} · mid={step.mid}</div>
           <div style={{ color: step.found ? colors.green : colors.yellow, fontSize: 40, fontWeight: 850 }}>{step.compare}</div>
           <div style={{ color: step.found ? colors.green : colors.cyan, fontSize: 38, fontWeight: 850 }}>{step.update}</div>
@@ -104,18 +104,15 @@ export const BinarySearchMidpoint12: React.FC = () => {
       </>}
 
       {phase === 4 && <>
-        <div style={{ position: "absolute", top: 300, left: 72, right: 72, display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
+        <div style={{ position: "absolute", top: 400, left: 72, right: 72, display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
           <Panel style={{ padding: 27, textAlign: "center", borderColor: "#3c5960" }}><div style={{ color: colors.cyan, fontSize: 30, fontWeight: 850 }}>아래쪽 mid</div><div style={{ color: "#edf0f4", fontFamily: "monospace", fontSize: 32, marginTop: 20 }}>19 → 3 → 5 → 12</div></Panel>
           <Panel style={{ padding: 27, textAlign: "center", borderColor: "#62522c" }}><div style={{ color: colors.yellow, fontSize: 30, fontWeight: 850 }}>위쪽 mid</div><div style={{ color: "#edf0f4", fontFamily: "monospace", fontSize: 32, marginTop: 20 }}>20 → 5 → 19 → 12</div></Panel>
         </div>
-        <Panel style={{ position: "absolute", top: 530, left: 100, right: 100, padding: 28, textAlign: "center", borderColor: "#31534a" }}><div style={{ color: colors.green, fontSize: 42, fontWeight: 900 }}>A[3] = 12 → index 3</div><div style={{ color: colors.green, fontSize: 44, fontWeight: 900, marginTop: 12 }}>두 방식 모두 return 3</div></Panel>
-        <Panel style={{ position: "absolute", top: 780, left: 100, right: 100, padding: 31, textAlign: "center" }}><div style={{ color: colors.cyan, fontSize: 36, fontWeight: 850 }}>두 방식 모두 4회 비교</div><div style={{ color: "#f4f5f7", fontSize: 34, marginTop: 18 }}>시간 복잡도 O(log n)</div></Panel>
-        <div style={{ position: "absolute", top: 1030, left: 90, right: 90, textAlign: "center", color: colors.muted, fontSize: 31 }}>정렬 배열 · left/right를 mid 기준으로 갱신</div>
+        <Panel style={{ position: "absolute", top: 630, left: 100, right: 100, padding: 28, textAlign: "center", borderColor: "#31534a" }}><div style={{ color: colors.green, fontSize: 42, fontWeight: 900 }}>A[3] = 12 → index 3</div><div style={{ color: colors.green, fontSize: 44, fontWeight: 900, marginTop: 12 }}>두 방식 모두 return 3</div></Panel>
+        <Panel style={{ position: "absolute", top: 880, left: 100, right: 100, padding: 31, textAlign: "center" }}><div style={{ color: colors.cyan, fontSize: 36, fontWeight: 850 }}>두 방식 모두 4회 비교</div><div style={{ color: "#f4f5f7", fontSize: 34, marginTop: 18 }}>시간 복잡도 O(log n)</div></Panel>
+        <div style={{ position: "absolute", top: 1130, left: 90, right: 90, textAlign: "center", color: colors.muted, fontSize: 31 }}>정렬 배열 · left/right를 mid 기준으로 갱신</div>
       </>}
 
-      <div style={{ position: "absolute", bottom: 72, left: 78, right: 78, height: 5, background: "#2b2e3c", borderRadius: 5 }}><div style={{ height: "100%", width: `${(seconds / 60) * 100}%`, background: colors.cyan, borderRadius: 5 }} /></div>
-      <div style={{ position: "absolute", bottom: 30, left: 78, color: "#727d8e", fontSize: 19, fontFamily: "monospace" }}>LOWER MID vs UPPER MID · KEY 12</div>
-      <div style={{ position: "absolute", bottom: 30, right: 78, color: "#727d8e", fontSize: 19, fontFamily: "monospace" }}>{String(Math.floor(seconds)).padStart(2, "0")} / 60s</div>
-    </AbsoluteFill>
+          </AbsoluteFill>
   );
 };

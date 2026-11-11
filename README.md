@@ -82,3 +82,26 @@ python3 -m venv ~/.venvs/supertonic
 - **영상:** [`remotion/out/binary-search-midpoint-overflow.mp4`](remotion/out/binary-search-midpoint-overflow.mp4)
 - **대본·수치 검산:** [`lessons/binary-search-midpoint-overflow/script.md`](lessons/binary-search-midpoint-overflow/script.md)
 - **Java 예제·장면표:** [`lessons/binary-search-midpoint-overflow/`](lessons/binary-search-midpoint-overflow/)
+
+## 알고리즘 영상 시리즈 14편
+
+모든 영상은 세로형 9:16이며, 휴대전화 쇼츠 인터페이스를 고려해 핵심 제목과 예시를 위·아래 및 오른쪽 UI 여백 안쪽에 배치했습니다. 각 편은 처음 배우는 사람을 위한 동기, 단계별 숫자 예시, 핵심 의사코드, 시간·공간 복잡도와 장단점을 담고 있습니다. 한국어 Supertonic 3 M1 남성 오프라인 내레이션입니다.
+
+| # | 주제 | 영상 | 대본·예시 검산 |
+| ---: | --- | --- | --- |
+| 1 | 이진 탐색 트리 | [`binary-search-tree.mp4`](remotion/out/binary-search-tree.mp4) | [`script.md`](lessons/binary-search-tree/script.md) |
+| 2 | AVL 트리 | [`avl-tree.mp4`](remotion/out/avl-tree.mp4) | [`script.md`](lessons/avl-tree/script.md) |
+| 3 | 버블 정렬 | [`bubble-sort.mp4`](remotion/out/bubble-sort.mp4) | [`script.md`](lessons/bubble-sort/script.md) |
+| 4 | 삽입 정렬 | [`insertion-sort.mp4`](remotion/out/insertion-sort.mp4) | [`script.md`](lessons/insertion-sort/script.md) |
+| 5 | 선택 정렬 | [`selection-sort.mp4`](remotion/out/selection-sort.mp4) | [`script.md`](lessons/selection-sort/script.md) |
+| 6 | 힙 정렬 | [`heap-sort.mp4`](remotion/out/heap-sort.mp4) | [`script.md`](lessons/heap-sort/script.md) |
+| 7 | 퀵 정렬 | [`quick-sort.mp4`](remotion/out/quick-sort.mp4) | [`script.md`](lessons/quick-sort/script.md) |
+| 8 | 병합 정렬 | [`merge-sort.mp4`](remotion/out/merge-sort.mp4) | [`script.md`](lessons/merge-sort/script.md) |
+| 9 | 계수 정렬 | [`counting-sort.mp4`](remotion/out/counting-sort.mp4) | [`script.md`](lessons/counting-sort/script.md) |
+| 10 | 기수 정렬 | [`radix-sort.mp4`](remotion/out/radix-sort.mp4) | [`script.md`](lessons/radix-sort/script.md) |
+| 11 | 버킷 정렬 | [`bucket-sort.mp4`](remotion/out/bucket-sort.mp4) | [`script.md`](lessons/bucket-sort/script.md) |
+| 12 | 셸 정렬 | [`shell-sort.mp4`](remotion/out/shell-sort.mp4) | [`script.md`](lessons/shell-sort/script.md) |
+| 13 | BST와 AVL 특성 비교 | [`tree-comparison.mp4`](remotion/out/tree-comparison.mp4) | [`script.md`](lessons/tree-comparison/script.md) |
+| 14 | 열 가지 정렬 한눈에 비교 | [`sorting-overview.mp4`](remotion/out/sorting-overview.mp4) | [`비교표 포함 대본`](lessons/sorting-overview/script.md) |
+
+영상 제작 데이터는 [`algorithm-episodes.json`](remotion/src/lessons/algorithm-episodes.json)에서 관리합니다. 로컬 음성은 `tools/build_algorithm_series.py`로 재생성할 수 있습니다.
