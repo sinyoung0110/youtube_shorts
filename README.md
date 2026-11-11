@@ -74,3 +74,11 @@ python3 -m venv ~/.venvs/supertonic
 - **영상:** [`remotion/out/binary-search-midpoint-12.mp4`](remotion/out/binary-search-midpoint-12.mp4)
 - **대본·풀이:** [`lessons/binary-search-midpoint-12/script.md`](lessons/binary-search-midpoint-12/script.md)
 - **코드·장면표:** [`lessons/binary-search-midpoint-12/`](lessons/binary-search-midpoint-12/)
+
+## 이진 탐색 중간값과 정수 오버플로우
+
+큰 인덱스에서 `(low + high) / 2`가 왜 위험한지 32비트 정수 예로 설명하고, 안전한 mid 계산식과 Java·C·Python의 차이를 비교합니다. 합성 경고음과 오프라인 남성 음성을 넣은 60초 영상입니다.
+
+- **영상:** [`remotion/out/binary-search-midpoint-overflow.mp4`](remotion/out/binary-search-midpoint-overflow.mp4)
+- **대본·수치 검산:** [`lessons/binary-search-midpoint-overflow/script.md`](lessons/binary-search-midpoint-overflow/script.md)
+- **Java 예제·장면표:** [`lessons/binary-search-midpoint-overflow/`](lessons/binary-search-midpoint-overflow/)

@@ -2,6 +2,7 @@ import { Composition } from "remotion";
 import { BinarySearch } from "./BinarySearch";
 import { BinarySearchExam2025Q14 } from "./lessons/BinarySearchExam2025Q14";
 import { BinarySearchMidpoint12 } from "./lessons/BinarySearchMidpoint12";
+import { BinarySearchMidpointOverflow } from "./lessons/BinarySearchMidpointOverflow";
 
 export const RemotionRoot: React.FC = () => (
   <>
@@ -24,6 +25,14 @@ export const RemotionRoot: React.FC = () => (
     <Composition
       id="BinarySearchMidpoint12"
       component={BinarySearchMidpoint12}
+      durationInFrames={1800}
+      fps={30}
+      width={1080}
+      height={1920}
+    />
+    <Composition
+      id="BinarySearchMidpointOverflow"
+      component={BinarySearchMidpointOverflow}
       durationInFrames={1800}
       fps={30}
       width={1080}
