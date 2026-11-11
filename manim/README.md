@@ -1,40 +1,40 @@
-# Manim 예제
+# Manim 이진 탐색 쇼츠
 
-`binary_search.py`는 9:16, 1080×1920, 30 fps의 약 32초짜리 이진 탐색 애니메이션입니다. 별도의 음성이나 API 키 없이 화면 요소만 렌더링합니다. 내레이션은 상위 폴더의 `shared/대본.md`를 사용합니다.
+`binary_search.py`는 9:16, 1080×1920, 30fps 영상 예제입니다. 정렬된 배열 `[4, 9, 13, 18, 23, 27, 31, 36, 42]`에서 27을 찾고, 가운데 비교가 `23 → 31 → 27` 순서로 진행됩니다.
 
 ## 설치
 
-현재 가상환경 생성은 되어 있지만, Manim의 `pycairo` 의존성 설치가 macOS의 `pkg-config` 부재로 중단됐습니다. 개발 도구 설치 후 다음을 실행하세요.
+이 Mac에서는 아래 설치와 렌더를 완료했습니다. 새 환경에서는 macOS용 Cairo/Pango 개발 파일과 Python 패키지가 필요합니다.
 
 ```bash
-cd /Users/sinyoung/youtube-shorts/manim
-brew install ffmpeg cairo pango pkgconf
-source .venv/bin/activate
-pip install -r requirements.txt
+cd /Users/sinyoung/youtube-shorts
+brew install cairo pango pkgconf
+python3 -m venv manim/.venv
+source manim/.venv/bin/activate
+python -m pip install -r manim/requirements.txt
+ln -sf "$(python -c 'import imageio_ffmpeg; print(imageio_ffmpeg.get_ffmpeg_exe())')" manim/.venv/bin/ffmpeg
 ```
 
-Homebrew가 Xcode Command Line Tools 오류를 내면 **시스템 설정 → 일반 → 소프트웨어 업데이트**에서 Command Line Tools를 먼저 업데이트한 후 위 설치를 다시 실행합니다. `MathTex`를 추가할 경우에만 LaTeX 배포판도 설치하세요. 이 예제는 `Text`만 사용하므로 LaTeX가 필요 없습니다.
+ImageIO 패키지의 ffmpeg 실행 파일을 가상환경에 연결하므로 이 예제에는 Homebrew의 ffmpeg formula가 필요하지 않습니다. `MathTex`를 새로 추가할 때만 LaTeX 배포판을 설치하세요. 현재 코드는 `Text`만 사용합니다.
 
 ## 렌더
 
 ```bash
-manim -pqh binary_search.py BinarySearchShorts
+cd /Users/sinyoung/youtube-shorts
+source manim/.venv/bin/activate
+manim -pqh manim/binary_search.py BinarySearchShorts
 ```
 
 - `-p`: 렌더 뒤 동영상 열기
 - `-q h`: 고화질 프리셋. 빠른 미리보기는 `-q l`
 
-정상 출력 위치는 `media/videos/binary_search/1080p30/BinarySearchShorts.mp4`입니다. 확인:
+완성 영상은 `manim/media/videos/binary_search/1920p30/BinarySearchShorts.mp4`에 생성됩니다. 이 환경에서 생성·검증한 파일은 [BinarySearchShorts.mp4](media/videos/binary_search/1920p30/BinarySearchShorts.mp4)입니다. 길이는 31.60초, 1080×1920, 30fps, H.264이며 전체 디코딩 검사에 통과했습니다.
+
+메타데이터와 재생 여부는 가상환경의 ffmpeg로 확인할 수 있습니다:
 
 ```bash
-ffprobe -v error -show_entries format=duration:stream=width,height,r_frame_rate -of default=noprint_wrappers=1 media/videos/binary_search/1080p30/BinarySearchShorts.mp4
+ffmpeg -i manim/media/videos/binary_search/1920p30/BinarySearchShorts.mp4
+ffmpeg -v error -i manim/media/videos/binary_search/1920p30/BinarySearchShorts.mp4 -f null -
 ```
 
-예상 값은 약 32초, 1080×1920, 30/1 fps입니다. 동영상이 생성되면 처음·23 확인·31 확인·27 정답·마지막 O(log n) 화면을 재생해 대본과 같은지 확인하세요.
-
-## 흔한 오류
-
-- `pkg-config` 또는 `cairo`를 찾을 수 없음: `brew install cairo pango pkgconf` 후 새 터미널에서 가상환경을 다시 켭니다.
-- `ffmpeg`를 찾을 수 없음: `brew install ffmpeg` 후 `which ffmpeg`와 `ffmpeg -version`으로 확인합니다.
-- `latex` 또는 `dvisvgm` 오류: 이 예제에선 수식 렌더를 쓰지 않으므로 `MathTex`를 일반 `Text`로 바꾸거나 LaTeX를 설치합니다.
-- 폰트/한글이 네모로 표시됨: macOS에 설치된 한글 산세리프 글꼴을 지정하고 다시 렌더합니다.
+한글이 네모로 표시되면 `binary_search.py`의 `Text`에 macOS 한글 산세리프 글꼴을 명시하세요.

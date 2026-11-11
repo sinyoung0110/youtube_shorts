@@ -34,15 +34,19 @@
 - `shared/openmontage-brief.md` — OpenMontage용 제작 brief
 - `shared/` — 모든 제작본에서 공유하는 대본과 타임라인
 
-Manim 렌더:
+Manim은 이 컴퓨터에서 설치와 렌더를 완료했습니다. 새 Mac에서는 Cairo/Pango/pkg-config를 준비한 뒤 가상환경에 의존성을 설치하고, ImageIO에 포함된 ffmpeg를 가상환경 명령으로 연결합니다:
 
 ```bash
 cd /Users/sinyoung/youtube-shorts
+brew install cairo pango pkgconf
+python3 -m venv manim/.venv
 source manim/.venv/bin/activate
+python -m pip install -r manim/requirements.txt
+ln -sf "$(python -c 'import imageio_ffmpeg; print(imageio_ffmpeg.get_ffmpeg_exe())')" manim/.venv/bin/ffmpeg
 manim -pqh manim/binary_search.py BinarySearchShorts
 ```
 
-완료되면 `manim/media/videos/binary_search/1080p30/BinarySearchShorts.mp4`를 확인합니다. Mac에서 실행할 때 ffmpeg, Cairo/Pango, LaTeX 관련 오류가 나면 아래 설치 안내의 해결 항목을 참고하세요.
+이 영상은 `manim/media/videos/binary_search/1920p30/BinarySearchShorts.mp4`에 있습니다. Homebrew의 ffmpeg formula 설치는 필요하지 않습니다. LaTeX 오류는 이 예제에서 LaTeX를 사용하지 않으므로 무시해도 됩니다.
 
 Remotion 미리보기와 렌더:
 
@@ -72,11 +76,11 @@ make preflight
 
 ## 생성 확인
 
-Remotion 버전의 MP4는 실제로 생성하고 전체 디코딩으로 읽기 오류가 없는지 확인했습니다. 출력은 33.00초, 1080×1920, 30fps, H.264입니다. `remotion/out/binary-search.mp4`를 바로 열어 볼 수 있습니다. Manim은 Python 코드 구문은 확인했지만, Manim 의존성 설치와 Manim 렌더는 시스템 `pkg-config` 부재로 아직 실행되지 않았습니다. HyperFrames `check --json --snapshots`는 오류 없이 통과했고, 무음 초안 경고 1건만 남았습니다. 음성과 HyperFrames MP4는 아직 없습니다.
+Remotion 버전은 33.00초, Manim 버전은 31.60초입니다. 두 영상 모두 1080×1920, 30fps, H.264로 생성됐고 전체 디코딩 검사도 통과했습니다. Manim의 영상은 `manim/media/videos/binary_search/1920p30/BinarySearchShorts.mp4`입니다. HyperFrames `check --json --snapshots`는 오류 없이 통과했지만 무음 초안 경고 1건이 남아 있고, HyperFrames MP4와 음성은 아직 없습니다.
 
-## 수동으로 필요한 시스템 준비
+## 환경 상태와 수동 설정
 
-Node.js 26.13.0과 Python 3.12.4는 이 환경에서 확인했습니다. OpenMontage는 Python 패키지·Remotion 컴포저·오프라인 Piper를 설치했습니다. Remotion Studio도 열렸습니다. 다만 macOS Command Line Tools가 오래되어 Homebrew `ffmpeg` 설치가 실패했습니다. 이 컴퓨터에서 실제 MP4 렌더를 진행하려면 먼저 **시스템 설정 → 일반 → 소프트웨어 업데이트**에서 Xcode Command Line Tools를 업데이트하고 `brew install ffmpeg`를 다시 실행하세요. 그 뒤 Manim의 `pycairo` 빌드에 필요한 Cairo/Pango 의존성도 확인합니다.
+Node.js 26.13.0, Python 3.12.4, Manim 0.22.1을 확인했습니다. 오래된 Command Line Tools는 16.2로 업데이트했고, `pkgconf`와 Manim 의존성을 설치했습니다. Homebrew 자체도 `brew update`에서 최신이라고 확인됐습니다. 이 macOS 14.5 환경에서 Homebrew ffmpeg formula 설치는 `ninja` 소스 빌드 오류로 중단됐지만, Manim은 ImageIO에 포함된 ffmpeg로 렌더가 정상 완료되어 추가 수동 설정은 없습니다. OpenMontage는 Python 패키지·Remotion 컴포저·오프라인 Piper를 설치했습니다. Remotion Studio도 열렸습니다.
 
 OpenMontage의 무료 Piper 한국어 음성을 쓰려면 사용할 한국어 음성 모델을 한 번 내려받아야 할 수 있습니다. 스톡 검색이나 클라우드 음성·이미지 제공자는 무료 API 키를 `.env`에 직접 추가해야 합니다. 키는 이 저장소에 커밋하지 마세요. 이번 예제의 대본과 세 로컬 프로젝트는 API 키 없이 준비했습니다.
 
