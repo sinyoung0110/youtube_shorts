@@ -40,3 +40,12 @@ for end in range(n - 1, 0, -1):
 | 10.3–22.4s | 4, 10, 3, 5, 1로 최대 힙을 만들면 루트는 10입니다. 10을 배열 끝으로 보내고, 남은 부분을 다시 힙으로 고치면 다음 최댓값 5가 루트에 옵니다. | 숫자 예시 |
 | 22.7–32.3s | 먼저 build max heap으로 힙을 만들고, 루트와 끝을 바꿉니다. sift down은 새 루트를 더 큰 자식과 바꾸며 힙 성질을 복구합니다. | 핵심 코드 |
 | 32.6–44.9s | 힙 구성은 선형 시간이고 전체 정렬은 최선과 최악 모두 O(n log n)입니다. 배열 안에서 처리해 추가 공간 O(1)이지만 안정 정렬은 아니고 접근이 흩어질 수 있습니다. | 복잡도와 선택 기준 |
+
+## 사실 확인 자료
+
+- [Princeton Algorithms: 정렬 성능표](https://algs4.cs.princeton.edu/cheatsheet/) — 선택·삽입·셸·병합·퀵·힙의 구현별 최선·평균·최악 비교 횟수, 추가 공간, 안정성.
+- [Open Data Structures: Counting/Radix sort](https://opendatastructures.org/versions/edition-0.1e/ods-cpp.pdf) — 계수·기수 정렬의 범위, 자릿수, 안정성 요구.
+- [CLRS bucket sort 분석 자료](https://belohlavek.inf.upol.cz/vyuka/Cormen-bucket-sort-analysis.pdf) — 균등 분포일 때 기대 선형 시간이라는 조건과 분석.
+- [Auckland: Shellsort gap sequences](https://www.cs.auckland.ac.nz/courses/compsci220s1t/lectures/lecturenotes/GG-lectures/220slides-lecture06.pdf) — 시간 복잡도는 간격 수열에 의존하며, 이 자료의 halving sequence 분석을 영상 설명과 구분.
+- [OpenDSA: Bubble sort](https://opendsa-server.cs.vt.edu/ODSA/Books/pubbook/odsa-all/fall-2019/Public_Instance/html/BubbleSort.html) — 조기 종료 없는 기본 반복 구조의 실행 시간.
+- [NIST DADS: Bubble sort](https://xlinux.nist.gov/dads/HTML/bubblesort.html) — 알고리즘 정의 및 일반적인 제곱 시간 특성.

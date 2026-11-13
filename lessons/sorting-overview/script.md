@@ -48,15 +48,23 @@ choose_sort(data):
 
 | 정렬 | 시간 | 추가 공간 | 안정성 |
 | --- | --- | --- | --- |
-| 버블 | O(n²) avg/worst | O(1) | 안정 |
-| 삽입 | O(n²) avg/worst | O(1) | 안정 |
-| 선택 | O(n²) | O(1) | 불안정 |
+| 버블 | Θ(n²) 모든 경우¹ | O(1) | 안정 |
+| 삽입 | 최선 Θ(n), 평균·최악 Θ(n²) | O(1) | 안정 |
+| 선택 | Θ(n²) 모든 경우 | O(1) | 불안정 |
 | 병합 | O(n log n) | O(n) | 안정 |
 | 힙 | O(n log n) | O(1) | 불안정 |
 | 퀵 | avg O(n log n) | 스택 | 불안정 |
-| 계수 | O(n+k) | O(k) | 구현별 |
+| 계수 | O(n+k) | O(n+k) | 구현별 |
 | 기수 | O(d(n+b)) | O(n+b) | 안정 패스 |
 | 버킷 | 기대 O(n+k) | O(n+k) | 구현별 |
 | 셸 | 간격별 상이 | O(1) | 불안정 |
 
-거품 정렬 최선은 조기 종료 최적화 시 O(n), 삽입 정렬 최선은 O(n)입니다. 퀵 정렬 최악은 O(n²), 버킷은 분포가 치우치면 최악 O(n²)입니다. 계수 정렬은 이 표의 출력형 구현은 불안정하며, 누적 개수 기반으로 배치하면 안정적으로 구현할 수 있습니다.
+기본 버블 정렬(조기 종료 없음)은 정렬된 입력에서도 비교하므로 최선·평균·최악 모두 Θ(n²)입니다. 교환이 없으면 종료하는 최적화 변형의 최선은 Θ(n)입니다. 삽입 정렬 최선은 Θ(n), 선택 정렬은 모든 경우 Θ(n²)입니다. 퀵 정렬 최악과 버킷 정렬의 최악은 Θ(n²)일 수 있습니다. 안정성은 같은 키의 입력 순서를 지키는 성질입니다.
+
+## 사실 확인 자료
+
+- [OpenDSA: 기본 버블 정렬 분석](https://opendsa-server.cs.vt.edu/ODSA/Books/pubbook/odsa-all/fall-2019/Public_Instance/html/BubbleSort.html) — 조기 종료를 넣지 않은 반복 구조의 best/average/worst 실행 시간 분석.
+- [NIST DADS: Bubble sort](https://xlinux.nist.gov/dads/HTML/bubblesort.html) — 버블 정렬 정의와 일반적인 O(n²) 특성.
+- [Princeton Algorithms: 정렬 성능표](https://algs4.cs.princeton.edu/cheatsheet/) — 선택·삽입·셸·병합·퀵·힙 정렬의 구현별 비교 횟수, 공간, 안정성. 버블 항목은 조기 종료 구현이라 기본 구현과 구분.
+- [CLRS bucket sort 분석 자료](https://belohlavek.inf.upol.cz/vyuka/Cormen-bucket-sort-analysis.pdf) — 균등 분포 가정에서의 기대 선형 시간과 입력 분포 조건.
+- [Open Data Structures](https://opendatastructures.org/versions/edition-0.1e/ods-cpp.pdf) — 계수 정렬 및 기수 정렬의 실행 시간과 안정성 전제.

@@ -42,3 +42,12 @@ for i in range(1, n):
 | 11.7–24.5s | 5, 2, 4, 1을 보죠. 2를 5 앞에 넣어 2, 5를 만들고, 4를 그 사이에 넣어 2, 4, 5. 마지막 1을 맨 앞으로 옮기면 정렬이 끝납니다. | 숫자 예시 |
 | 24.8–35.8s | key가 새로 넣을 값입니다. 왼쪽의 더 큰 값들을 한 칸씩 오른쪽으로 밀고, 빈 자리에 key를 놓습니다. 이미 정렬된 앞부분은 매 단계 유지됩니다. | 핵심 코드 |
 | 36.1–48.1s | 거의 정렬된 경우 한 번씩만 확인해 최선 O(n), 평균과 최악은 O(n²)입니다. 추가 공간은 O(1)이고 안정적이지만, 큰 역순 입력에는 이동이 많습니다. | 복잡도와 선택 기준 |
+
+## 사실 확인 자료
+
+- [Princeton Algorithms: 정렬 성능표](https://algs4.cs.princeton.edu/cheatsheet/) — 선택·삽입·셸·병합·퀵·힙의 구현별 최선·평균·최악 비교 횟수, 추가 공간, 안정성.
+- [Open Data Structures: Counting/Radix sort](https://opendatastructures.org/versions/edition-0.1e/ods-cpp.pdf) — 계수·기수 정렬의 범위, 자릿수, 안정성 요구.
+- [CLRS bucket sort 분석 자료](https://belohlavek.inf.upol.cz/vyuka/Cormen-bucket-sort-analysis.pdf) — 균등 분포일 때 기대 선형 시간이라는 조건과 분석.
+- [Auckland: Shellsort gap sequences](https://www.cs.auckland.ac.nz/courses/compsci220s1t/lectures/lecturenotes/GG-lectures/220slides-lecture06.pdf) — 시간 복잡도는 간격 수열에 의존하며, 이 자료의 halving sequence 분석을 영상 설명과 구분.
+- [OpenDSA: Bubble sort](https://opendsa-server.cs.vt.edu/ODSA/Books/pubbook/odsa-all/fall-2019/Public_Instance/html/BubbleSort.html) — 조기 종료 없는 기본 반복 구조의 실행 시간.
+- [NIST DADS: Bubble sort](https://xlinux.nist.gov/dads/HTML/bubblesort.html) — 알고리즘 정의 및 일반적인 제곱 시간 특성.

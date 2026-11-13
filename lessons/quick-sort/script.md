@@ -42,3 +42,12 @@ A[i], A[hi] = A[hi], A[i]
 | 11.0–24.1s | 6, 3, 8, 2, 5에서 pivot을 5로 잡습니다. 3과 2는 왼쪽, 6과 8은 오른쪽에 두고 pivot을 가운데 놓으면 2, 3, 5, 6, 8이 됩니다. | 숫자 예시 |
 | 24.4–34.0s | 코드는 끝 값을 pivot으로 택합니다. j가 구간을 훑고 pivot 이하 값을 왼쪽에 모은 뒤, 마지막에 pivot을 경계 위치와 교환합니다. | 핵심 코드 |
 | 34.3–46.3s | 평균 시간은 O(n log n)이지만 pivot이 매번 최솟값이나 최댓값이면 최악 O(n²)입니다. 제자리 분할은 빠르지만 재귀 스택이 필요하고 보통 안정 정렬은 아닙니다. | 복잡도와 선택 기준 |
+
+## 사실 확인 자료
+
+- [Princeton Algorithms: 정렬 성능표](https://algs4.cs.princeton.edu/cheatsheet/) — 선택·삽입·셸·병합·퀵·힙의 구현별 최선·평균·최악 비교 횟수, 추가 공간, 안정성.
+- [Open Data Structures: Counting/Radix sort](https://opendatastructures.org/versions/edition-0.1e/ods-cpp.pdf) — 계수·기수 정렬의 범위, 자릿수, 안정성 요구.
+- [CLRS bucket sort 분석 자료](https://belohlavek.inf.upol.cz/vyuka/Cormen-bucket-sort-analysis.pdf) — 균등 분포일 때 기대 선형 시간이라는 조건과 분석.
+- [Auckland: Shellsort gap sequences](https://www.cs.auckland.ac.nz/courses/compsci220s1t/lectures/lecturenotes/GG-lectures/220slides-lecture06.pdf) — 시간 복잡도는 간격 수열에 의존하며, 이 자료의 halving sequence 분석을 영상 설명과 구분.
+- [OpenDSA: Bubble sort](https://opendsa-server.cs.vt.edu/ODSA/Books/pubbook/odsa-all/fall-2019/Public_Instance/html/BubbleSort.html) — 조기 종료 없는 기본 반복 구조의 실행 시간.
+- [NIST DADS: Bubble sort](https://xlinux.nist.gov/dads/HTML/bubblesort.html) — 알고리즘 정의 및 일반적인 제곱 시간 특성.

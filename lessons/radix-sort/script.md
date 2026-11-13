@@ -40,3 +40,12 @@ while max(A) // exp > 0:
 | 10.4–24.3s | 21, 13, 12, 23을 일의 자리로 안정 정렬하면 21, 12, 13, 23입니다. 이어 십의 자리로 안정 정렬하면 12, 13, 21, 23이 됩니다. | 숫자 예시 |
 | 24.6–34.2s | exp는 현재 자리의 가중치입니다. 각 자리에서 안정적인 계수 정렬을 하고 exp를 열 배씩 키워 더 높은 자리로 이동합니다. | 핵심 코드 |
 | 34.5–46.7s | d자릿수, 기수 b라면 보통 O(d 곱하기 n 더하기 b) 시간과 O(n+b) 공간이 듭니다. 중간 단계가 안정 정렬이어야 하고, 자릿수와 키 표현이 제한된 데이터에 적합합니다. | 복잡도와 선택 기준 |
+
+## 사실 확인 자료
+
+- [Princeton Algorithms: 정렬 성능표](https://algs4.cs.princeton.edu/cheatsheet/) — 선택·삽입·셸·병합·퀵·힙의 구현별 최선·평균·최악 비교 횟수, 추가 공간, 안정성.
+- [Open Data Structures: Counting/Radix sort](https://opendatastructures.org/versions/edition-0.1e/ods-cpp.pdf) — 계수·기수 정렬의 범위, 자릿수, 안정성 요구.
+- [CLRS bucket sort 분석 자료](https://belohlavek.inf.upol.cz/vyuka/Cormen-bucket-sort-analysis.pdf) — 균등 분포일 때 기대 선형 시간이라는 조건과 분석.
+- [Auckland: Shellsort gap sequences](https://www.cs.auckland.ac.nz/courses/compsci220s1t/lectures/lecturenotes/GG-lectures/220slides-lecture06.pdf) — 시간 복잡도는 간격 수열에 의존하며, 이 자료의 halving sequence 분석을 영상 설명과 구분.
+- [OpenDSA: Bubble sort](https://opendsa-server.cs.vt.edu/ODSA/Books/pubbook/odsa-all/fall-2019/Public_Instance/html/BubbleSort.html) — 조기 종료 없는 기본 반복 구조의 실행 시간.
+- [NIST DADS: Bubble sort](https://xlinux.nist.gov/dads/HTML/bubblesort.html) — 알고리즘 정의 및 일반적인 제곱 시간 특성.

@@ -22,7 +22,10 @@ const TableRows: React.FC<{ rows: string[][] }> = ({ rows }) => (
   </div>
 );
 
-export const AlgorithmEpisode: React.FC<{ episode: Episode }> = ({ episode }) => {
+type VisualProps = { slug: string; seconds: number; duration: number };
+type EpisodeProps = { episode: Episode; SortingVisual?: React.FC<VisualProps>; TreeVisual?: React.FC<VisualProps> };
+
+export const AlgorithmEpisode: React.FC<EpisodeProps> = ({ episode, SortingVisual, TreeVisual }) => {
   const frame = useCurrentFrame();
   const seconds = frame / fps;
   const phase = episode.starts.reduce((index, start, i) => (seconds >= start ? i : index), 0);
@@ -35,11 +38,13 @@ export const AlgorithmEpisode: React.FC<{ episode: Episode }> = ({ episode }) =>
   const summaryHalf = (episode.durations[3] ?? 0) / 2;
   const summaryRows = episode.summaryRows ? (localTime < summaryHalf ? episode.summaryRows.slice(0, 6) : episode.summaryRows.slice(6)) : [];
   const titleFor = ["왜 이 방법이 필요할까요?", "작은 예시로 직접 따라가요", "핵심 코드를 한 줄씩 봐요", "복잡도와 선택 기준"];
+  const isSortingTrace = episode.kind === "정렬";
+  const isTreeTrace = episode.kind === "트리" || episode.slug === "tree-comparison";
 
   return <AbsoluteFill style={{ background: "radial-gradient(circle at 50% 22%, #17202d 0%, #0b0d12 55%, #090b10 100%)", color: "#f4f5f7", fontFamily: '"Apple SD Gothic Neo", Arial, Helvetica, sans-serif' }}>
     {episode.voice.map((_, i) => <Sequence key={i} from={Math.round(episode.starts[i] * fps)}><Audio src={staticFile(`audio/${episode.slug}-${String(i + 1).padStart(2, "0")}.wav`)} volume={0.98} /></Sequence>)}
     <div style={{ position: "absolute", top: 210, left: 70, right: 215, color: palette.cyan, fontSize: 22, fontWeight: 800, letterSpacing: 1.8 }}>{episode.kind.toUpperCase()} <span style={{ color: "#738093" }}>/</span> {episode.tag}</div>
-    <div style={{ position: "absolute", top: 278, left: 64, right: 205, textAlign: "center", fontSize: 44, lineHeight: 1.24, fontWeight: 900 }}>{phase === 0 ? episode.title : titleFor[phase]}</div>
+    <div style={{ position: "absolute", zIndex: 10, top: 278, left: 64, right: 205, textAlign: "center", fontSize: 44, lineHeight: 1.24, fontWeight: 900 }}>{phase === 0 ? episode.title : titleFor[phase]}</div>
 
     {phase === 0 && <>
       <Panel style={{ position: "absolute", top: 475, left: 66, right: 208, padding: "36px 30px", borderColor: palette.yellow, textAlign: "center" }}>
@@ -50,15 +55,17 @@ export const AlgorithmEpisode: React.FC<{ episode: Episode }> = ({ episode }) =>
     </>}
 
     {phase === 1 && <>
-      <Panel style={{ position: "absolute", top: 420, left: 66, right: 208, padding: 25, borderColor: palette.yellow, textAlign: "center" }}>
+      {!isSortingTrace && !isTreeTrace && <Panel style={{ position: "absolute", top: 420, left: 66, right: 208, padding: 25, borderColor: palette.yellow, textAlign: "center" }}>
         <div style={{ color: palette.muted, fontSize: 25 }}>예시 입력</div>
         <div style={{ color: palette.yellow, fontSize: 34, lineHeight: 1.35, fontWeight: 850, fontFamily: "monospace", marginTop: 10 }}>{episode.input}</div>
-      </Panel>
-      <div style={{ position: "absolute", top: 625, left: 66, right: 208, display: "flex", flexDirection: "column", gap: 14 }}>
+      </Panel>}
+      {isSortingTrace && SortingVisual ? <SortingVisual slug={episode.slug} seconds={localTime} duration={phaseDuration} /> : null}
+      {isTreeTrace && TreeVisual ? <TreeVisual slug={episode.slug} seconds={localTime} duration={phaseDuration} /> : null}
+      {!isSortingTrace && !isTreeTrace && <div style={{ position: "absolute", top: 625, left: 66, right: 208, display: "flex", flexDirection: "column", gap: 14 }}>
         {episode.trace.map((step, i) => <Panel key={step} style={{ minHeight: 126, padding: "22px 24px", display: "flex", alignItems: "center", borderColor: traceIndex === i ? palette.green : "#343748", background: traceIndex === i ? "#14251f" : palette.panel, opacity: traceIndex === i ? 1 : 0.75 }}>
           <b style={{ color: traceIndex === i ? palette.green : palette.muted, fontSize: 29, marginRight: 18 }}>{i + 1}</b><span style={{ fontSize: 28, lineHeight: 1.4 }}>{step}</span>
         </Panel>)}
-      </div>
+      </div>}
     </>}
 
     {phase === 2 && <>

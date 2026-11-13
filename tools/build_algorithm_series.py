@@ -34,10 +34,9 @@ LESSONS = [
         "slug":"bubble-sort", "title":"버블 정렬", "tag":"BUBBLE SORT", "kind":"정렬",
         "question":"이웃끼리 바꾸면 큰 값이 어디로 갈까?", "why":"가까운 원소를 차례로 비교·교환해 큰 값을 끝으로 밀어냅니다. 동작이 단순해 학습에는 좋지만 큰 입력에는 비효율적입니다.",
         "input":"[5, 1, 4, 2]", "trace":["5와 1 교환 → [1,5,4,2]", "5와 4, 이어서 5와 2 교환", "첫 바퀴 끝 → [1,4,2,5]"],
-        "code":"for end in range(n - 1, 0, -1):\n    swapped = False\n    for i in range(end):\n        if A[i] > A[i + 1]:\n            A[i], A[i+1] = A[i+1], A[i]\n            swapped = True\n    if not swapped: break", "complexity":"최선 O(n)¹ · 평균·최악 O(n²)", "space":"추가 공간 O(1) · 안정 정렬",
-        "pre":"인접한 두 값을 비교해 큰 값을 오른쪽으로", "pro":"구현이 쉽고 거의 정렬된 데이터에서 조기 종료 가능", "con":"비교와 이동이 많아 큰 입력에 느림",
-        "voice":["정렬이 필요한데 원리가 궁금하다면 이웃한 두 값만 비교해 보세요. 버블 정렬은 큰 값을 오른쪽 끝으로 한 칸씩 밀어 보내는 가장 단순한 비교 정렬입니다.","5, 1, 4, 2에서 5와 1을 바꾸고, 5와 4를 바꾸고, 5와 2도 바꾸면 첫 바퀴 끝에서 가장 큰 5가 맨 오른쪽에 놓입니다.","안쪽 반복문은 이웃한 A[i]와 A[i+1]을 비교합니다. 왼쪽이 더 크면 두 값을 바꾸고, 바뀐 적이 없으면 이미 정렬되어 반복을 멈출 수 있습니다.","일반적인 버블 정렬은 평균과 최악이 O(n²)라 큰 데이터에는 느립니다. 교환이 없는 바퀴를 감지하면 최선은 O(n)이 되고, 같은 값의 순서는 유지되는 안정 정렬입니다."],
-        "note":"¹ swapped 플래그를 둔 최적화 버전 기준.",
+        "code":"for end in range(n - 1, 0, -1):\n    for i in range(end):\n        if A[i] > A[i + 1]:\n            A[i], A[i+1] = A[i+1], A[i]", "complexity":"기본 구현: 최선·평균·최악 Θ(n²)", "space":"추가 공간 O(1) · 안정 정렬",
+        "pre":"인접한 두 값을 비교해 큰 값을 오른쪽으로 · 조기 종료 최적화 없음", "pro":"구현과 동작 원리가 단순", "con":"정렬된 입력도 비교를 계속해 큰 입력에 비효율적",
+        "voice":["큰 값을 오른쪽 끝으로 보내는 가장 단순한 정렬을 볼까요? 이웃한 두 값을 비교하고 순서가 거꾸로면 바꿉니다. 한 바퀴가 끝나면 가장 큰 값이 제자리에 갑니다.","5, 1, 4, 2에서 5와 1, 다음 5와 4, 다음 5와 2를 비교하며 바꾸면 첫 바퀴 끝에 5가 맨 오른쪽에 갑니다. 다음 바퀴는 1과 4, 4와 2를 비교해 1, 2, 4, 5가 됩니다.","코드에는 교환이 없으면 멈추는 장치가 없습니다. 원소가 네 개면 비교 횟수는 3 더하기 2 더하기 1, 총 6회입니다. 입력이 이미 정렬돼도 같은 여섯 번을 비교합니다.","따라서 지금 본 기본 구현은 최선·평균·최악 모두 세타 n제곱입니다. 교환이 없는 바퀴에서 멈추는 최적화 버전만 최선 세타 n으로 줄어듭니다. 공간은 상수이고 안정 정렬이지만, 큰 입력에는 보통 다른 정렬을 고릅니다."],
     },
     {
         "slug":"insertion-sort", "title":"삽입 정렬", "tag":"INSERTION SORT", "kind":"정렬",
@@ -83,9 +82,9 @@ LESSONS = [
         "slug":"counting-sort", "title":"계수 정렬", "tag":"COUNTING SORT", "kind":"정렬",
         "question":"값을 비교하지 않고 개수를 세면?", "why":"정수의 값 범위가 좁다면 값별 출현 횟수를 세어 바로 순서대로 출력할 수 있습니다. 비교 정렬의 하한을 피하지만 범위가 커지면 낭비가 큽니다.",
         "input":"[4, 2, 2, 1, 3]", "trace":["1:1개 · 2:2개 · 3:1개 · 4:1개", "값 순서로 개수만큼 출력", "[1, 2, 2, 3, 4]"],
-        "code":"lo, hi = min(A), max(A)\ncount = [0] * (hi - lo + 1)\nfor x in A: count[x - lo] += 1\nresult = []\nfor i, c in enumerate(count):\n    result.extend([i + lo] * c)", "complexity":"시간 O(n + k) · k=max−min+1", "space":"추가 공간 O(k) · 이 구현은 안정성이 핵심 아님",
+        "code":"lo, hi = min(A), max(A)\ncount = [0] * (hi - lo + 1)\nfor x in A: count[x - lo] += 1\nresult = []\nfor i, c in enumerate(count):\n    result.extend([i + lo] * c)", "complexity":"시간 O(n + k) · k=max−min+1", "space":"추가 공간 O(n + k) · 출력형 구현",
         "pre":"정수 키와 감당 가능한 작은 값 범위", "pro":"범위가 작으면 비교 없이 선형에 가까움", "con":"값 범위가 크면 시간·메모리 낭비",
-        "voice":["값을 하나씩 비교하지 않고도 정렬할 수 있을까요? 계수 정렬은 정수 값의 범위가 작을 때 각 값이 몇 번 나왔는지 세어 순서대로 내보냅니다.","4, 2, 2, 1, 3에서 1은 한 번, 2는 두 번, 3과 4는 각각 한 번입니다. 이 개수를 차례대로 출력하면 1, 2, 2, 3, 4가 됩니다.","최솟값과 최댓값 차이만큼 count 배열을 만들고, x가 나오면 해당 칸을 하나 늘립니다. 마지막에 각 값을 저장된 횟수만큼 결과에 추가합니다.","k를 값 범위 크기라고 하면 시간은 O(n+k), 공간은 O(k)입니다. 범위가 좁은 정수에서 유리하고, 범위가 데이터 수보다 훨씬 크면 메모리와 초기화 비용이 커집니다."],
+        "voice":["값을 하나씩 비교하지 않고도 정렬할 수 있을까요? 계수 정렬은 정수 값의 범위가 작을 때 각 값이 몇 번 나왔는지 세어 순서대로 내보냅니다.","4, 2, 2, 1, 3에서 1은 한 번, 2는 두 번, 3과 4는 각각 한 번입니다. 이 개수를 차례대로 출력하면 1, 2, 2, 3, 4가 됩니다.","최솟값과 최댓값 차이만큼 count 배열을 만들고, x가 나오면 해당 칸을 하나 늘립니다. 마지막에 각 값을 저장된 횟수만큼 결과에 추가합니다.","k를 값 범위 크기라고 하면 시간은 O(n+k)입니다. 이 코드처럼 결과 배열을 따로 만들면 공간도 O(n+k)입니다. 범위가 좁은 정수에서 유리하고, 범위가 데이터 수보다 훨씬 크면 메모리와 초기화 비용이 커집니다."],
     },
     {
         "slug":"radix-sort", "title":"기수 정렬", "tag":"RADIX SORT", "kind":"정렬",
@@ -99,7 +98,7 @@ LESSONS = [
         "slug":"bucket-sort", "title":"버킷 정렬", "tag":"BUCKET SORT", "kind":"정렬",
         "question":"값 구간을 나눠 바구니마다 정렬하면?", "why":"값 범위를 여러 버킷으로 나눠 분산하고, 각 버킷 내부를 정렬한 뒤 이어 붙입니다. 값이 고르게 퍼질 때 빠릅니다.",
         "input":"[0.42, 0.32, 0.23, 0.52, 0.25]", "trace":["0.2대: [0.23, 0.25]", "0.3대: [0.32] · 0.4대: [0.42]", "0.5대: [0.52] → 이어 붙이기"],
-        "code":"buckets = [[] for _ in range(n)]\nfor x in A: buckets[int(n * x)].append(x)\nfor bucket in buckets:\n    insertion_sort(bucket)\nreturn flatten(buckets)", "complexity":"균등 분포 기대 O(n + k) · 최악 O(n²)", "space":"추가 공간 O(n + k)",
+        "code":"buckets = [[] for _ in range(10)]  # 0.1 간격\nfor x in A: buckets[int(10 * x)].append(x)\nfor bucket in buckets:\n    insertion_sort(bucket)\nreturn flatten(buckets)", "complexity":"균등 분포 기대 O(n + k) · 최악 O(n²)", "space":"추가 공간 O(n + k)",
         "pre":"예시는 값이 [0,1)에 있고 버킷에 고르게 분산된다고 가정", "pro":"균등하게 퍼진 실수 데이터에서 빠를 수 있음", "con":"분포가 치우치면 한 버킷에서 느려짐",
         "voice":["값들이 범위에 고르게 퍼져 있다면 구간별 바구니로 나눌 수 있습니다. 버킷 정렬은 각 버킷을 따로 정렬하고 순서대로 이어 붙입니다.","0.42, 0.32, 0.23, 0.52, 0.25를 소수 첫째 자리 구간으로 나눕니다. 0.2대엔 0.23과 0.25, 0.3대엔 0.32, 0.4대엔 0.42, 0.5대엔 0.52가 들어갑니다.","각 값을 버킷에 넣고, 버킷 내부를 삽입 정렬한 다음 앞 버킷부터 이어 붙입니다. 이 예시는 값이 0 이상 1 미만이라 인덱스 계산이 간단합니다.","값이 고르게 퍼지면 기대 시간 O(n+k)에 가까울 수 있지만, 한 버킷에 몰리면 내부 정렬 때문에 최악 O(n²)입니다. 분포 가정과 버킷 수 선택이 성능을 좌우합니다."],
     },
@@ -127,9 +126,9 @@ LESSONS = [
         "pre":"안정성·메모리·분포·최악 시간 요구를 먼저 정함", "pro":"조건에 맞추면 속도와 메모리를 함께 조절", "con":"모든 입력에서 가장 빠른 단일 정렬은 없음",
         "voice":["정렬 알고리즘이 이렇게 많은 이유는 하나가 모든 입력에서 최고가 아니기 때문입니다. 작은 데이터, 최악 시간, 안정성, 메모리 중 무엇을 지킬지 먼저 정합니다.","작고 거의 정렬됐다면 삽입 정렬, 최악 O(n log n)이 필요하면 병합이나 힙, 값 범위가 좁은 정수면 계수 정렬이 후보입니다. 데이터 조건이 선택을 바꿉니다.","버블·삽입·선택은 구현이 단순하지만 보통 O(n²)입니다. 병합·힙은 최악 O(n log n), 퀵은 평균 O(n log n)이지만 최악 O(n²)입니다. 계수·기수·버킷은 값 범위나 자릿수, 분포를 활용합니다.","병합은 안정적이고 추가 메모리를 쓰며, 힙은 제자리지만 불안정합니다. 계수와 기수는 조건이 맞으면 비교 정렬보다 빨라질 수 있습니다. 입력 크기뿐 아니라 키 범위, 분포, 안정성 요구를 함께 보세요."],
         "summaryRows": [
-            ["버블", "O(n²) avg/worst", "O(1)", "안정"], ["삽입", "O(n²) avg/worst", "O(1)", "안정"], ["선택", "O(n²)", "O(1)", "불안정"],
+            ["버블", "Θ(n²) 모든 경우¹", "O(1)", "안정"], ["삽입", "최선 Θ(n), 평균·최악 Θ(n²)", "O(1)", "안정"], ["선택", "Θ(n²) 모든 경우", "O(1)", "불안정"],
             ["병합", "O(n log n)", "O(n)", "안정"], ["힙", "O(n log n)", "O(1)", "불안정"], ["퀵", "avg O(n log n)", "스택", "불안정"],
-            ["계수", "O(n+k)", "O(k)", "구현별"], ["기수", "O(d(n+b))", "O(n+b)", "안정 패스"],
+            ["계수", "O(n+k)", "O(n+k)", "구현별"], ["기수", "O(d(n+b))", "O(n+b)", "안정 패스"],
             ["버킷", "기대 O(n+k)", "O(n+k)", "구현별"], ["셸", "간격별 상이", "O(1)", "불안정"],
         ],
         "voice":["정렬 알고리즘이 이렇게 많은 이유는 하나가 모든 입력에서 최고가 아니기 때문입니다. 작은 데이터, 최악 시간, 안정성, 메모리 중 무엇을 지킬지 먼저 정합니다.","작고 거의 정렬됐다면 삽입 정렬, 최악 O(n log n)이 필요하면 병합이나 힙, 값 범위가 좁은 정수면 계수 정렬이 후보입니다. 데이터 조건이 선택을 바꿉니다.","버블·삽입·선택은 보통 O(n²)입니다. 병합·힙은 최악 O(n log n), 퀵은 평균 O(n log n)이지만 최악 O(n²)입니다. 계수·기수·버킷은 각각 범위, 자릿수, 분포를 활용하고 셸은 간격 수열에 따라 달라집니다.","메모리 O(1)인 힙은 불안정하고, 병합은 안정적이지만 O(n)을 더 씁니다. 버블과 삽입은 안정적이고, 선택·퀵·셸은 보통 불안정합니다. 계수·기수는 키 조건이 맞을 때, 버킷은 고른 분포일 때 유리합니다. 입력과 메모리, 안정성 요구를 보고 고르세요."],
@@ -155,7 +154,9 @@ def write_lesson_docs(lesson: dict, timings: list[float]) -> None:
     if lesson.get("summaryRows"):
         lines += ["", "## 열 가지 정렬 비교 표", "", "시간은 평균·최악 또는 조건부 복잡도임을 구분하세요. `n`은 원소 수, `k`는 키 범위 또는 버킷 수, `d`는 자릿수, `b`는 기수입니다.", "", "| 정렬 | 시간 | 추가 공간 | 안정성 |", "| --- | --- | --- | --- |"]
         lines.extend("| " + " | ".join(row) + " |" for row in lesson["summaryRows"])
-        lines += ["", "거품 정렬 최선은 조기 종료 최적화 시 O(n), 삽입 정렬 최선은 O(n)입니다. 퀵 정렬 최악은 O(n²), 버킷은 분포가 치우치면 최악 O(n²)입니다. 계수 정렬은 이 표의 출력형 구현은 불안정하며, 누적 개수 기반으로 배치하면 안정적으로 구현할 수 있습니다."]
+        lines += ["", "기본 버블 정렬(조기 종료 없음)은 정렬된 입력에서도 비교하므로 최선·평균·최악 모두 Θ(n²)입니다. 교환이 없으면 종료하는 최적화 변형의 최선은 Θ(n)입니다. 삽입 정렬 최선은 Θ(n), 선택 정렬은 모든 경우 Θ(n²)입니다. 퀵 정렬 최악과 버킷 정렬의 최악은 Θ(n²)일 수 있습니다. 안정성은 같은 키의 입력 순서를 지키는 성질입니다.", "", "## 사실 확인 자료", "", "- [OpenDSA: 기본 버블 정렬 분석](https://opendsa-server.cs.vt.edu/ODSA/Books/pubbook/odsa-all/fall-2019/Public_Instance/html/BubbleSort.html) — 조기 종료를 넣지 않은 반복 구조의 best/average/worst 실행 시간 분석.", "- [NIST DADS: Bubble sort](https://xlinux.nist.gov/dads/HTML/bubblesort.html) — 버블 정렬 정의와 일반적인 O(n²) 특성.", "- [Princeton Algorithms: 정렬 성능표](https://algs4.cs.princeton.edu/cheatsheet/) — 선택·삽입·셸·병합·퀵·힙 정렬의 구현별 비교 횟수, 공간, 안정성. 버블 항목은 조기 종료 구현이라 기본 구현과 구분.", "- [CLRS bucket sort 분석 자료](https://belohlavek.inf.upol.cz/vyuka/Cormen-bucket-sort-analysis.pdf) — 균등 분포 가정에서의 기대 선형 시간과 입력 분포 조건.", "- [Open Data Structures](https://opendatastructures.org/versions/edition-0.1e/ods-cpp.pdf) — 계수 정렬 및 기수 정렬의 실행 시간과 안정성 전제."]
+    if lesson["kind"] == "정렬":
+        lines += ["", "## 사실 확인 자료", "", "- [Princeton Algorithms: 정렬 성능표](https://algs4.cs.princeton.edu/cheatsheet/) — 선택·삽입·셸·병합·퀵·힙의 구현별 최선·평균·최악 비교 횟수, 추가 공간, 안정성.", "- [Open Data Structures: Counting/Radix sort](https://opendatastructures.org/versions/edition-0.1e/ods-cpp.pdf) — 계수·기수 정렬의 범위, 자릿수, 안정성 요구.", "- [CLRS bucket sort 분석 자료](https://belohlavek.inf.upol.cz/vyuka/Cormen-bucket-sort-analysis.pdf) — 균등 분포일 때 기대 선형 시간이라는 조건과 분석.", "- [Auckland: Shellsort gap sequences](https://www.cs.auckland.ac.nz/courses/compsci220s1t/lectures/lecturenotes/GG-lectures/220slides-lecture06.pdf) — 시간 복잡도는 간격 수열에 의존하며, 이 자료의 halving sequence 분석을 영상 설명과 구분.", "- [OpenDSA: Bubble sort](https://opendsa-server.cs.vt.edu/ODSA/Books/pubbook/odsa-all/fall-2019/Public_Instance/html/BubbleSort.html) — 조기 종료 없는 기본 반복 구조의 실행 시간.", "- [NIST DADS: Bubble sort](https://xlinux.nist.gov/dads/HTML/bubblesort.html) — 알고리즘 정의 및 일반적인 제곱 시간 특성."]
     (folder / "script.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
     (folder / "scene-plan.md").write_text(
         "# 장면표\n\n| 장면 | 화면 구성 | 검산 포인트 |\n| --- | --- | --- |\n" +

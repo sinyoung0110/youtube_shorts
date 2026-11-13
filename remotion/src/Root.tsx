@@ -5,6 +5,7 @@ import { BinarySearchMidpoint12 } from "./lessons/BinarySearchMidpoint12";
 import { BinarySearchMidpointOverflow } from "./lessons/BinarySearchMidpointOverflow";
 import algorithmEpisodes from "./lessons/algorithm-episodes.json";
 import { AlgorithmEpisode, type Episode } from "./lessons/AlgorithmEpisode";
+import { SortingTrace, TreeTrace } from "./lessons/AlgorithmVisuals";
 
 const batchEpisodes = algorithmEpisodes as Episode[];
 
@@ -22,7 +23,7 @@ export const RemotionRoot: React.FC = () => (
       <Composition
         key={episode.slug}
         id={episode.slug}
-        component={AlgorithmEpisode}
+        component={AlgorithmWithVisuals}
         durationInFrames={episode.totalSeconds * 30}
         fps={30}
         width={1080}
@@ -55,4 +56,8 @@ export const RemotionRoot: React.FC = () => (
       height={1920}
     />
   </>
+);
+
+const AlgorithmWithVisuals: React.FC<{ episode: Episode }> = ({ episode }) => (
+  <AlgorithmEpisode episode={episode} SortingVisual={SortingTrace} TreeVisual={TreeTrace} />
 );
